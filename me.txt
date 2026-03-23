@@ -116,3 +116,11 @@ Yogesh has completed multiple industry-recognized certifications focused on data
   Developed strong proficiency in Python for data handling, including data manipulation, transformation, and analysis using pandas.
 
 These certifications strengthened his core understanding of data-centric workflows and machine learning fundamentals, which he has applied in building real-world AI systems and production-oriented pipelines.
+
+## Contact
+
+Email: yogeshyogi7504@gmail.com  
+LinkedIn: https://www.linkedin.com/in/yogesh-work  
+GitHub: https://github.com/Yogesh07050  
+
+Available for freelance and collaboration opportunities.
