@@ -6,7 +6,7 @@ An AI-powered chatbot that knows everything about me — my skills, projects, ex
 
 ## Live Demo
 
-**Try it here → https://about-yogesh-chatbot.streamlit.app/
+**Try it here → https://about-yogesh-chatbot.streamlit.app/**
 
 ---
 
