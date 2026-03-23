@@ -1,101 +1,96 @@
-# 🤖 Personal AI Assistant — Yogesh
+# Personal AI Assistant — Yogesh
 
-> An AI-powered chatbot that knows everything about me — my skills, projects, experience, and availability. Ask it anything, just like you'd ask me directly.
-
----
-
-## 🌐 Live Demo
-
-**👉 [Try it here → your-link-here.streamlit.app](https://your-link-here.streamlit.app)**
+An AI-powered chatbot that knows everything about me — my skills, projects, experience, and availability. Ask it anything, just like you'd ask me directly.
 
 ---
 
-## 💡 What Is This?
+## Live Demo
 
-This is a **personal AI assistant** I built that acts as a smarter, always-available version of my resume.
-
-Instead of reading through a PDF or waiting for me to reply — you can just **ask it a question** and get an instant, clear answer about:
-
-- My skills and technical expertise
-- Projects I've worked on
-- My professional experience
-- What I currently do at Justo Global
-- How I approach problems and build systems
-- Whether I'm available for new work
-
-It speaks as me — in first person — based on a profile I wrote about myself. No guessing, no generic answers.
+**Try it here → https://your-link-here.streamlit.app**
 
 ---
 
-## 🎯 Why I Built This
+## What Is This?
 
-Most portfolios are static — a PDF resume or a website with bullet points.
+This is a personal AI assistant I built that acts as a smarter, always-available version of my resume.
 
-I wanted something **interactive** that clients and collaborators could actually talk to.
+Instead of reading through a PDF or waiting for me to reply, you can directly ask questions and get clear, structured answers about:
+
+- My skills and technical expertise  
+- Projects I have worked on  
+- My professional experience  
+- My current role at Justo Global  
+- My approach to problem solving and system design  
+- My availability for new opportunities  
+
+The assistant responds in first person, based on a structured profile I designed. It avoids generic responses and focuses only on accurate, relevant information.
+
+---
+
+## Why I Built This
+
+Most portfolios are static — typically a resume or a basic website.
+
+I wanted to build something interactive that allows clients and collaborators to directly engage and understand my work.
 
 This project demonstrates:
-- My ability to build and ship a real AI product end to end
-- How I integrate modern AI APIs into working applications
-- My focus on practical, usable tools — not just experiments
+
+- Ability to build and deploy a complete AI application  
+- Practical integration of modern LLM APIs  
+- Focus on building usable, real-world tools instead of experimental prototypes  
 
 ---
 
-## ✨ Features
+## Features
 
 | Feature | Description |
 |--------|-------------|
-| 💬 Chat Interface | Clean, modern chat UI — works like ChatGPT |
-| 🧠 AI-Powered | Uses Llama 3.3 70B — a state-of-the-art language model |
-| ⚡ Fast Responses | Powered by Groq — responses in under 2 seconds |
-| 🎯 Stays on Topic | Only answers from my actual profile — no hallucination |
-| 📱 Works Everywhere | Runs in any browser, desktop or mobile |
-| 🔒 Private & Secure | No personal data stored, no login required |
+| Chat Interface | Clean and simple chat experience similar to modern AI tools |
+| AI-Powered | Uses Llama 3.3 70B for high-quality responses |
+| Fast Responses | Powered by Groq with low latency |
+| Controlled Responses | Answers are grounded in a predefined profile |
+| Cross-Platform | Works on desktop and mobile browsers |
+| Privacy Focused | No user data storage or authentication required |
 
 ---
 
-## 🛠 What I Used to Build It
+## Technology Stack
 
-> *(For the technically curious — no prior knowledge needed to use the app)*
+- Streamlit — Web interface  
+- Groq API — LLM inference  
+- Llama 3.3 70B — Language model  
+- Python — Core application logic  
 
-- **Streamlit** — the web interface
-- **Groq API** — the AI engine (fast, free, powerful)
-- **Llama 3.3 70B** — the language model that understands and answers questions
-- **Python** — the programming language tying it all together
-
-The entire app was designed, built, and deployed by me — from the AI logic to the UI design.
+The application was built end-to-end, including prompt design, backend logic, and UI.
 
 ---
 
-## 📸 Screenshot
-
-> *(Add a screenshot of your app here)*
+## Screenshot
 
 ![App Screenshot](screenshot.png)
 
 ---
 
-## 💼 What This Shows About My Work
+## What This Demonstrates
 
-This project is a working example of what I can build for clients:
+This project reflects the type of systems I can build:
 
-- **AI Chatbots** trained on your business, product, or personal brand
-- **Customer support bots** that answer from your documentation
-- **Internal assistants** for your team based on your company knowledge
-- **Lead qualification bots** that answer prospect questions 24/7
-
-If you need something like this built for your business — **let's talk.**
+- AI chatbots trained on business or product data  
+- Customer support assistants based on documentation  
+- Internal knowledge assistants for teams  
+- Lead qualification and interaction systems  
 
 ---
 
-## 📬 Get In Touch
+## Contact
 
-| | |
-|---|---|
-| 📧 Email | yogesh@example.com |
-| 💼 LinkedIn | [linkedin.com/in/yogesh](https://linkedin.com/in/yogesh) |
-| 🐙 GitHub | [github.com/yogesh](https://github.com/yogesh) |
-| 🌐 Portfolio | [yogesh.dev](https://yogesh.dev) |
+Email: yogesh@example.com  
+LinkedIn: https://linkedin.com/in/yogesh  
+GitHub: https://github.com/yogesh  
+Portfolio: https://yogesh.dev  
 
 ---
 
-*Built by Yogesh · AI/ML Engineer · Tamil Nadu, India*
+Built by Yogesh  
+AI/ML Engineer  
+Tamil Nadu, India
