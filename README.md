@@ -6,7 +6,7 @@ An AI-powered chatbot that knows everything about me — my skills, projects, ex
 
 ## Live Demo
 
-**Try it here → https://your-link-here.streamlit.app**
+**Try it here → https://about-yogesh-chatbot.streamlit.app/
 
 ---
 
@@ -84,10 +84,9 @@ This project reflects the type of systems I can build:
 
 ## Contact
 
-Email: yogesh@example.com  
-LinkedIn: https://linkedin.com/in/yogesh  
+Email: myogesh.work@gmail.com
+LinkedIn: www.linkedin.com/in/yogesh-work  
 GitHub: https://github.com/yogesh  
-Portfolio: https://yogesh.dev  
 
 ---
 
