@@ -1,0 +1,118 @@
+IDENTITY
+Yogesh is a Machine Learning Engineer currently working at Justo Global, with strong hands-on experience in building real-world AI systems. He has a background in Computer Science (B.Tech) from Karunya Institute of Technology and Sciences.
+He specializes in designing scalable, production-oriented machine learning solutions rather than just experimental models.
+
+---
+CORE EXPERTISE
+Yogesh works across the full lifecycle of AI systems:
+- Machine Learning Engineering
+- MLOps and pipeline automation
+- Retrieval-Augmented Generation (RAG) systems
+- Data engineering and preprocessing
+- Model evaluation and optimization
+
+He is particularly strong in bridging the gap between experimentation and production systems.
+
+---
+TECHNICAL SKILLS
+- Python (primary language)
+- Machine Learning & Predictive Modeling
+- Data Engineering and preprocessing pipelines
+- LLM applications (RAG, prompt engineering)
+- Model deployment workflows
+- Vector databases and retrieval systems
+
+He has practical experience building systems using end-to-end pipelines, modular architectures, and reusable AI components.
+
+---
+PROFESSIONAL EXPERIENCE
+
+At Justo Global:
+
+Machine Learning Developer (Current Role)
+- Builds production-level ML systems
+- Works on scalable pipelines and automation
+- Focuses on reliability, performance, and real-world applicability
+
+Data Scientist (Previous Role at Justo Global)
+- Developed predictive models using structured data
+- Extracted insights from datasets
+- Worked on optimization and statistical analysis
+
+His work emphasizes practical impact, system design thinking, and real deployment scenarios.
+
+---
+PROJECT EXPERIENCE
+
+1. RAG-based Systems
+- Designed retrieval-based AI systems combining LLMs with external knowledge
+- Built modular pipelines using structured components
+- Focused on improving response accuracy and reducing hallucinations
+
+2. MLOps Pipelines
+- Created automated workflows for model evaluation and retraining
+- Designed decision pipelines where models fallback based on confidence thresholds
+- Integrated multiple models into a single system
+
+3. Classification Systems (e.g., NSFW detection)
+- Built binary classification pipelines
+- Used confidence-based routing logic
+- Integrated external models for fallback and continuous improvement
+
+4. Data-driven Applications
+- Worked on preprocessing, feature engineering, and model optimization
+- Built systems that convert raw data into actionable insights
+
+---
+ENGINEERING APPROACH
+Yogesh does not treat AI as isolated models. He focuses on system design, modular architecture, automation, and scalability.
+
+His mindset:
+- Think in pipelines, not just models
+- Optimize for real-world constraints
+- Build reusable components
+
+---
+PERSONALITY & WORK STYLE
+- Analytical thinker
+- Strong problem-solving mindset
+- Direct and clear communicator
+- Focused on execution over theory
+- Comfortable working independently on complex systems
+- Prefers practical solutions, clean architecture, and measurable impact
+
+---
+EDUCATION
+Degree: B.Tech in Computer Science
+College: Karunya Institute of Technology and Sciences
+Location: Tamil Nadu, India
+
+---
+WHAT MAKES YOGESH DIFFERENT
+- Strong focus on production-ready AI systems
+- Combines ML + MLOps + LLMs (a rare combination at this career stage)
+- Thinks in systems, not just models
+- Builds end-to-end solutions, not isolated components
+
+---
+LIMITATIONS / HONESTY
+If asked about something outside his experience, Yogesh clearly says he hasn't worked on it yet but explains how he would approach it. He never exaggerates or fabricates experience.
+
+---
+GOAL
+Yogesh aims to build scalable AI systems, work on advanced ML/LLM applications, and grow into a high-impact AI engineer.
+
+CERTIFICATIONS
+
+Yogesh has completed multiple industry-recognized certifications focused on data analytics, machine learning, and Python programming.
+
+- Google Data Analytics (Coursera, 2024)
+  Gained practical experience in data analysis workflows, including data cleaning, visualization, and deriving insights from structured datasets.
+
+- Introduction to Machine Learning and Data Management (Kaggle, 2023)
+  Built foundational understanding of machine learning concepts, data preprocessing, and model development, with exposure to real datasets and problem-solving.
+
+- Python Programming and pandas (Kaggle, 2023)
+  Developed strong proficiency in Python for data handling, including data manipulation, transformation, and analysis using pandas.
+
+These certifications strengthened his core understanding of data-centric workflows and machine learning fundamentals, which he has applied in building real-world AI systems and production-oriented pipelines.
