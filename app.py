@@ -6,36 +6,36 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# ─────────────────────────────────────────────
-#  CONFIG
-# ─────────────────────────────────────────────
+# ------------------------------------------------------------------------------
+# CONFIG
+# ------------------------------------------------------------------------------
 st.set_page_config(
     page_title="Ask About Yogesh",
-    page_icon="🤖",
+    page_icon=":robot_face:",
     layout="centered",
     initial_sidebar_state="collapsed",
 )
 
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
-MODEL = "llama-3.3-70b-versatile"
-ME_FILE = Path(__file__).parent / "me.txt"
+MODEL        = "llama-3.3-70b-versatile"
+ME_FILE      = Path(__file__).parent / "me.txt"
 
-# ─────────────────────────────────────────────
-#  LOAD PROFILE
-# ─────────────────────────────────────────────
+# ------------------------------------------------------------------------------
+# LOAD PROFILE
+# ------------------------------------------------------------------------------
 def load_profile() -> str:
     if ME_FILE.exists():
         content = ME_FILE.read_text(encoding="utf-8").strip()
         if content:
             return content
         return "[me.txt exists but is empty — please fill it in]"
-    return "[me.txt not found — make sure it's in the same folder as app.py]"
+    return "[me.txt not found — make sure it is in the same folder as app.py]"
 
 profile = load_profile()
 
-# ─────────────────────────────────────────────
-#  SYSTEM PROMPT
-# ─────────────────────────────────────────────
+# ------------------------------------------------------------------------------
+# SYSTEM PROMPT
+# ------------------------------------------------------------------------------
 SYSTEM_PROMPT = f"""You are representing Yogesh, an AI/ML Engineer based in Tamil Nadu, India.
 
 STRICT RULES:
@@ -46,32 +46,37 @@ STRICT RULES:
 - NEVER invent projects, skills, or experience not listed in the profile
 - NEVER hallucinate. If unsure, say you don't have that info
 
-════════════════════════════════════════
+{'=' * 40}
 YOGESH'S COMPLETE PROFILE
-════════════════════════════════════════
+{'=' * 40}
 {profile}
-════════════════════════════════════════
+{'=' * 40}
 
 Remember: Only answer from the profile above. Do not make anything up.
 """
 
-# ─────────────────────────────────────────────
-#  GROQ API CALL
-# ─────────────────────────────────────────────
+# ------------------------------------------------------------------------------
+# GROQ API
+# ------------------------------------------------------------------------------
 def call_groq(messages: list[dict]) -> str:
     if not GROQ_API_KEY:
-        return "⚠️ **API key missing.** Add `GROQ_API_KEY=your_key` to your `.env` file.\nGet a free key at: https://console.groq.com/keys"
+        return (
+            "API key missing. Add GROQ_API_KEY=your_key to your .env file. "
+            "Get a free key at: https://console.groq.com/keys"
+        )
+
     headers = {
         "Authorization": f"Bearer {GROQ_API_KEY}",
         "Content-Type": "application/json",
     }
     payload = {
-        "model": MODEL,
-        "messages": messages,
-        "max_tokens": 800,
+        "model":       MODEL,
+        "messages":    messages,
+        "max_tokens":  800,
         "temperature": 0.3,
-        "top_p": 0.9,
+        "top_p":       0.9,
     }
+
     try:
         resp = requests.post(
             "https://api.groq.com/openai/v1/chat/completions",
@@ -81,67 +86,68 @@ def call_groq(messages: list[dict]) -> str:
         )
         resp.raise_for_status()
         return resp.json()["choices"][0]["message"]["content"].strip()
+
     except requests.exceptions.Timeout:
-        return "⚠️ Request timed out. Please try again."
+        return "Request timed out. Please try again."
     except requests.exceptions.HTTPError:
         code = resp.status_code
         if code == 401:
-            return "⚠️ Invalid API key. Check your `GROQ_API_KEY` in `.env`."
-        elif code == 429:
-            return "⚠️ Rate limit hit. Wait a moment and try again."
-        return f"⚠️ API error {code}: {resp.text}"
+            return "Invalid API key. Check your GROQ_API_KEY in .env."
+        if code == 429:
+            return "Rate limit hit. Wait a moment and try again."
+        return f"API error {code}: {resp.text}"
     except Exception as e:
-        return f"⚠️ Unexpected error: {e}"
+        return f"Unexpected error: {e}"
 
-# ─────────────────────────────────────────────
-#  SESSION STATE INIT
-# ─────────────────────────────────────────────
-if "messages" not in st.session_state:
-    st.session_state.messages = []
-if "input_text" not in st.session_state:
-    st.session_state.input_text = ""
+# ------------------------------------------------------------------------------
+# SESSION STATE
+# ------------------------------------------------------------------------------
+if "messages"         not in st.session_state:
+    st.session_state.messages         = []
+if "input_text"       not in st.session_state:
+    st.session_state.input_text       = ""
 if "pending_question" not in st.session_state:
     st.session_state.pending_question = ""
 
-# ─────────────────────────────────────────────
-#  SEND LOGIC — runs via callback BEFORE widgets render
-# ─────────────────────────────────────────────
+# ------------------------------------------------------------------------------
+# CALLBACKS
+# ------------------------------------------------------------------------------
 def handle_send():
-    """Called by button's on_click — runs before the widget tree is drawn."""
     question = st.session_state.input_text.strip()
     if not question:
         return
-    # Store question to process, clear the input
     st.session_state.pending_question = question
-    st.session_state.input_text = ""   # safe here — widget not rendered yet
+    st.session_state.input_text       = ""
 
 def handle_suggestion(q: str):
-    """Called by suggestion pill on_click."""
     st.session_state.pending_question = q
+    st.session_state.input_text       = ""
+
+def handle_clear():
+    st.session_state.messages   = []
     st.session_state.input_text = ""
 
-# ─────────────────────────────────────────────
-#  PROCESS PENDING QUESTION (before rendering)
-# ─────────────────────────────────────────────
+# ------------------------------------------------------------------------------
+# PROCESS PENDING QUESTION  (runs before any widget is rendered)
+# ------------------------------------------------------------------------------
 if st.session_state.pending_question:
     question = st.session_state.pending_question
     st.session_state.pending_question = ""
 
     st.session_state.messages.append({"role": "user", "content": question})
 
-    history_window = st.session_state.messages[-12:]
     api_messages = [{"role": "system", "content": SYSTEM_PROMPT}]
-    for m in history_window:
+    for m in st.session_state.messages[-12:]:
         api_messages.append({"role": m["role"], "content": m["content"]})
 
-    with st.spinner("Thinking…"):
+    with st.spinner("Thinking..."):
         reply = call_groq(api_messages)
 
     st.session_state.messages.append({"role": "assistant", "content": reply})
 
-# ─────────────────────────────────────────────
-#  CUSTOM CSS
-# ─────────────────────────────────────────────
+# ------------------------------------------------------------------------------
+# CSS  (UI unchanged)
+# ------------------------------------------------------------------------------
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap');
@@ -177,6 +183,7 @@ header[data-testid="stHeader"] { display: none; }
     max-width: 76%; font-size: 0.9rem; line-height: 1.55;
     box-shadow: 0 2px 12px rgba(60,60,180,0.18);
 }
+
 .msg-ai { display: flex; justify-content: flex-start; margin: 1rem 0; align-items: flex-start; gap: 0.65rem; }
 .msg-ai .avatar {
     width: 34px; height: 34px; border-radius: 50%;
@@ -244,32 +251,32 @@ hr { border-color: #1a1a28 !important; margin: 1.2rem 0 !important; }
 </style>
 """, unsafe_allow_html=True)
 
-# ─────────────────────────────────────────────
-#  DEBUG SIDEBAR
-# ─────────────────────────────────────────────
+# ------------------------------------------------------------------------------
+# SIDEBAR  (debug info)
+# ------------------------------------------------------------------------------
 with st.sidebar:
-    st.markdown("### 🔧 Debug Panel")
+    st.markdown("### Debug Panel")
     st.markdown(f"**me.txt found:** `{ME_FILE.exists()}`")
     st.markdown(f"**Profile length:** `{len(profile)} chars`")
-    st.markdown(f"**API key set:** `{'Yes ✅' if GROQ_API_KEY else 'No ❌'}`")
+    st.markdown(f"**API key set:** `{'Yes' if GROQ_API_KEY else 'No'}`")
     st.divider()
     st.markdown("**Profile preview:**")
     st.code(profile[:300], language=None)
 
-# ─────────────────────────────────────────────
-#  HERO
-# ─────────────────────────────────────────────
+# ------------------------------------------------------------------------------
+# HERO
+# ------------------------------------------------------------------------------
 st.markdown("""
 <div class="hero">
-    <div class="badge">🤖 AI/ML Engineer · Tamil Nadu, India</div>
+    <div class="badge">AI/ML Engineer · Tamil Nadu, India</div>
     <h1>Ask Anything About Yogesh</h1>
     <p class="subtitle">Skills &nbsp;·&nbsp; Projects &nbsp;·&nbsp; Experience &nbsp;·&nbsp; MLOps &nbsp;·&nbsp; RAG Systems &nbsp;·&nbsp; Availability</p>
 </div>
 """, unsafe_allow_html=True)
 
-# ─────────────────────────────────────────────
-#  SUGGESTED QUESTIONS
-# ─────────────────────────────────────────────
+# ------------------------------------------------------------------------------
+# SUGGESTED QUESTIONS
+# ------------------------------------------------------------------------------
 SUGGESTIONS = [
     "What are your core skills?",
     "Tell me about your RAG projects",
@@ -283,18 +290,13 @@ if not st.session_state.messages:
     for i, (col, q) in enumerate(zip(cols, SUGGESTIONS)):
         with col:
             st.markdown('<div class="pill-btn">', unsafe_allow_html=True)
-            st.button(
-                q,
-                key=f"sug_{i}",
-                on_click=handle_suggestion,
-                args=(q,),
-            )
+            st.button(q, key=f"sug_{i}", on_click=handle_suggestion, args=(q,))
             st.markdown('</div>', unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
 
-# ─────────────────────────────────────────────
-#  CHAT HISTORY
-# ─────────────────────────────────────────────
+# ------------------------------------------------------------------------------
+# CHAT HISTORY
+# ------------------------------------------------------------------------------
 with st.container():
     for msg in st.session_state.messages:
         if msg["role"] == "user":
@@ -310,43 +312,36 @@ with st.container():
                 <div class="bubble">{content}</div>
             </div>""", unsafe_allow_html=True)
 
-# ─────────────────────────────────────────────
-#  INPUT AREA
-# ─────────────────────────────────────────────
+# ------------------------------------------------------------------------------
+# INPUT
+# ------------------------------------------------------------------------------
 st.markdown("<hr>", unsafe_allow_html=True)
 
 col1, col2 = st.columns([5, 1])
 with col1:
     st.text_input(
         label="question",
-        placeholder="Ask anything about Yogesh…",
+        placeholder="Ask anything about Yogesh...",
         label_visibility="collapsed",
-        key="input_text",          # bound to st.session_state.input_text
+        key="input_text",
     )
 with col2:
-    st.button(
-        "Send →",
-        use_container_width=True,
-        on_click=handle_send,      # callback fires before widget tree redraws
-    )
+    st.button("Send", use_container_width=True, on_click=handle_send)
 
-# ─────────────────────────────────────────────
-#  CLEAR CONVERSATION
-# ─────────────────────────────────────────────
+# ------------------------------------------------------------------------------
+# CLEAR
+# ------------------------------------------------------------------------------
 if st.session_state.messages:
     st.markdown("<br>", unsafe_allow_html=True)
     _, mid, _ = st.columns([3, 1, 3])
     with mid:
         st.markdown('<div class="clear-btn">', unsafe_allow_html=True)
-        def handle_clear():
-            st.session_state.messages = []
-            st.session_state.input_text = ""
-        st.button("🗑 Clear", key="clear", on_click=handle_clear)
+        st.button("Clear", key="clear", on_click=handle_clear)
         st.markdown('</div>', unsafe_allow_html=True)
 
-# ─────────────────────────────────────────────
-#  FOOTER
-# ─────────────────────────────────────────────
+# ------------------------------------------------------------------------------
+# FOOTER
+# ------------------------------------------------------------------------------
 st.markdown("""
 <div class="footer">
     Powered by <span>Groq · Llama 3.3 70B</span> &nbsp;·&nbsp; Built by Yogesh
